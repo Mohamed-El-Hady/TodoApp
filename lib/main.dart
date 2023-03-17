@@ -34,7 +34,7 @@ class Task {
 }
 
 List allTasks = [
-  Task(title: "Task_1", status: false),
+  Task(title: "Task_1", status: true),
   Task(title: "Task_2", status: true),
   Task(title: "Task_3", status: false),
 ];
@@ -46,8 +46,41 @@ class _ToDoAppState extends State<ToDoApp> {
       floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.black,
-        onPressed: () {},
-        child: IconButton(onPressed: () {}, icon: Icon(Icons.add)),
+        onPressed: () {
+          showModalBottomSheet(
+              context: context,
+              builder: (BuildContext context) {
+                return Container(
+                  padding: EdgeInsets.all(22),
+                  color: Colors.grey[500],
+                  height: double.infinity,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      TextField(
+                        maxLength: 20,
+                        decoration: InputDecoration(hintText: "Add New Text"),
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      TextButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          child: Text(
+                            "ADD",
+                            style: TextStyle(fontSize: 20,color: Colors.grey[900]),
+
+                          ))
+                    ],
+                  ),
+                );
+              },
+              isScrollControlled: true,
+              );
+        },
+        child: Icon(Icons.add),
       ),
       body: Column(
         children: [
